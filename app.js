@@ -4,11 +4,18 @@ const cors = require('cors');
 
 const app = express();
 
+const allowedOrigins = ['http://localhost:5173', 'https://feedbackcolector.netlify.app'];
+
 app.use(cors({
-    origin: 'https://feedbackcolector.netlify.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true 
-  }));
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 
 app.use(express.json());
 app.use('/api/v1',routes)
