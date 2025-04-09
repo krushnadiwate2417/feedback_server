@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const db = require('../../server');
+
 
 const feedback = mongoose.Schema({
     fullName : {
@@ -23,5 +23,5 @@ const feedback = mongoose.Schema({
     }
 })
 
-const UserFeedBack = db.fdDb.model('feedback',feedback);
+const UserFeedBack = mongoose.model('feedback',feedback);
 module.exports = UserFeedBack;

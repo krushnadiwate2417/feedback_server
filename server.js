@@ -5,14 +5,9 @@ const dotenv = require('dotenv');
 dotenv.config({path : "./config.env"});
 
 
-exports.fdDb = mongoose.createConnection(process.env.MONGODB_STR,{
-    useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-exports.carsDb = mongoose.createConnection(process.env.MONGODB_STR_CARS,{
-    useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGODB_STR)
+.then(()=>{console.log('DataBase Connected')})
+.catch((err)=>{console.log(err)});
 
 
 app.listen(3000,()=>{
